@@ -13,3 +13,13 @@ tags:
     name: markdown
   - slug: journal
     name: journal
+  - slug: theming
+    name: theming
+  - slug: assignment
+    name: assignment
+  - slug: data
+    name: data analysis
+  - slug: ml
+    name: machine learning
+  - slug: contest
+    name: contest
