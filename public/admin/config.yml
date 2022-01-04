@@ -99,13 +99,13 @@ collections:
     extension: "mdx"
     format: "frontmatter"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}_{{slug}}"
+    slug: "{{slug}}"
     identifier_field: slug
     summary: "{{title}}"
     fields:
       - label: "Slug"
         name: "slug"
-        widget: "hidden"
+        widget: "string"
       - label: "Title"
         name: "title"
         widget: "string"
