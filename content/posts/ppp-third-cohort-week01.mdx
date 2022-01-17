@@ -1,0 +1,66 @@
+---
+slug: ppp-third-cohort-week01
+title: Plutus Pioneer Program Week01 Repl Explanation
+date: 2022-01-17
+author: bashar
+tags:
+  - document
+  - haskell
+---
+If you came to Week 01 of PPP after just completing the Learn you Haskell book, this post will help you understand some of the weird syntax in the EnglishAuction.hs contract file.
+
+Starting from the weird symbols in the expressions like 
+
+* `PlutusTx.unstableMakeIsData ''AuctionAction`(symbol `''`): the double single quotation mark is part of template haskell (TH). TH is meta-programming, ie writing haskell to generate haskell. Similar symbols include `''SomeType` or `[| some value |]` or `$(some value)`. If you want to learn about TH more read [this on the discord server](https://discordapp.com/channels/826816523368005654/834340082273878046/931460456843980840) or if you feel adventourous go [here](https://markkarpov.com/tutorial/th.html).
+* `data AuctionDatum = AuctionDatum
+    { adAuction    :: !Auction
+    , adHighestBid :: !(Maybe Bid)
+    } deriving P.Show` (symbol `!`): the exclamation mark enforces strictness instead of laziness. More details [here](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/strict.html).
+* `minBid AuctionDatum{..} = case adHighestBid of
+    Nothing      -> aMinBid adAuction
+    Just Bid{..} -> bBid + 1` (symbol `{..}`): It's called a record wildcard and is used to have variables with same names as that of the constructor of the type. More details [here](http://learn.hfm.io/datatypes.html).
+
+Now if you try to start a `nix-shell` in the week01 directory and try to run expressions from the file in the cabal repl, you may still not be able to run them. I asked a question on [CSE](https://cardano.stackexchange.com/questions/6421/running-week01-expressions-in-repl) for the same. The problem is that the first lines at the top
+
+```
+{-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE DeriveAnyClass             #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE DerivingStrategies         #-}
+{-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE NoImplicitPrelude          #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RecordWildCards            #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE TypeApplications           #-}
+{-# LANGUAGE TypeFamilies               #-}
+{-# LANGUAGE TypeOperators              #-}
+```
+
+need to be added in some way to the repl (these lines are [pragma](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/pragmas.html) lines and [Language Extensions](https://ghc.gitlab.haskell.org/ghc/doc/libraries/Cabal-3.7.0.0/Language-Haskell-Extension.html) in particular). paste the following
+(NOTE: I found this `:set -XTemplateHaskell` somewhere when learning Template Haskell and I started experimenting with the pragma names by adding a `-X` in front of them)
+```
+:set -XDataKinds
+:set -XDeriveAnyClass
+:set -XDeriveGeneric
+:set -XDerivingStrategies
+:set -XFlexibleContexts
+:set -XGeneralizedNewtypeDeriving
+:set -XLambdaCase
+:set -XMultiParamTypeClasses
+:set -XNoImplicitPrelude
+:set -XOverloadedStrings
+:set -XRecordWildCards
+:set -XScopedTypeVariables
+:set -XTemplateHaskell
+:set -XTypeApplications
+:set -XTypeFamilies
+:set -XTypeOperators
+```
+You should be able to evaluate expressions from the file without any worries now.
+
+Thanks to @Micah and @Luis from the IOG discord server for helping.
