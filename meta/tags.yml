@@ -23,3 +23,5 @@ tags:
     name: machine learning
   - slug: contest
     name: contest
+  - slug: haskell
+    name: haskell
