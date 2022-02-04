@@ -7,15 +7,16 @@ tags:
   - document
   - haskell
 ---
-These commands are run on a Ubuntu 20.04.1 LTS VM.
+In this article, I will be sharing my way of generating addresses on the testnet and transferring funds between them without running a cardano-node. I made this article so that people with low specs can interact with the testnet. The article is roughly divided into three sections: Installation, Setup, and Transfer. These commands are run on a Ubuntu 20.04.1 LTS VM.
 
+# Installation
 ## Install `cardano-cli`
-Get the `cardano-node` build from iohk from here https://hydra.iohk.io/build/9941151. You can chose another build too.
+Get the `cardano-node` build from iohk from [here](https://hydra.iohk.io/build/9941151). You can choose another build too.
 Extract the files
 ```bash
 tar -xvzf cardano-node-1.33.0-linux.tar.gz
 ```
-and then add them to your PATH. For ubuntu simply copying the contents to a directory called `bin` in your `~` dir should be enough. Don't forget to `reset` your terminal.
+and then add them to your PATH. For ubuntu simply copying the contents to a directory called `bin` in your `~` dir should be enough (don't forget to `reset` your terminal).
 
 ## Install `bcc`
 `bcc` or [blockfrost-cardano-cli](https://github.com/blockfrost/blockfrost-cardano-cli#bcc-query-protocol-parameters) is blockfrost's cardano-cli with a few commands implemented. This is will allow us to submit transactions to the testnet without running a node. Create an account [here](https://blockfrost.io/) then install the cli using the command below.
@@ -23,14 +24,17 @@ and then add them to your PATH. For ubuntu simply copying the contents to a dire
 ```bash
 npm install -g @blockfrost/blockfrost-cardano-cli
 ```
-now either set the `BLOCKFROST_PROJECT_ID_TESTNET` variable for the current shell or add it to your `.bash_profile` I recommend adding it to your shell using the command below
+now either set the `BLOCKFROST_PROJECT_ID_TESTNET` variable for the current shell or add it to your `.bash_profile`. I recommend adding it to your shell using the command below
 ```bash
 export BLOCKFROST_PROJECT_ID_TESTNET=<your-key-here>
 ```
 Get your key from the blockfrost [dashboard] (https://blockfrost.io/dashboard?callbackUrl=%2Fdashboard).
 
+# Setup
 ## Create addresses
-### Generate addresses
+
+The following commands will generate 2 keys and then generate their addresses for the testnet.
+### Generate Keys
 ```bash
 cardano-cli address key-gen \
     --verification-key-file 01.vkey \
@@ -39,7 +43,7 @@ cardano-cli address key-gen \
     --verification-key-file 02.vkey \
     --signing-key-file 02.skey
 ```
-### Make payment addresses
+### Generate addresses
 
 ```bash
 cardano-cli address build \
@@ -51,14 +55,13 @@ cardano-cli address build \
     --testnet-magic 1097911063 \
     --out-file 02.addr
 ```
-## Get funds from faucet
-Do a `cat 01.addr` on the terminal and use the address to get funds from the [faucet](https://testnets.cardano.org/en/testnets/cardano/tools/faucet/)
+## Get funds from the faucet
+Do a `cat 01.addr` on the terminal and use the address to get funds from the [faucet](https://testnets.cardano.org/en/testnets/cardano/tools/faucet/).
 
 ## Query from testnet
-
+To check whether you received the funds from the faucet or not run the following command. Optionally run `bcc query protocol-parameters -t --out-file protocol.json`. It will get the protocol parameters to calculate the min-fees. You can approximate the fees to `200000` if you don't care.
 
 ```bash
-bcc query protocol-parameters -t --out-file protocol.json
 bcc query utxo --address $(cat 01.addr) -t
 ```
 
@@ -70,13 +73,16 @@ bcc query utxo --address $(cat 01.addr) -t
  ac2214ad459b6d5921992b9563ba4da6505e88fb7a12f75103c5ba68d43eb4fe 0      1000000000 lovelace 
  1c05c7beee527db726aa534e1b3ec9f316211676f81c833a74982d18a6abac37 1      689400000 lovelace  
 ```
+Select a utxo from this table and use the `TxHash` and `TxIx` in the `--tx-in` line in the next command.
 
-
+# Transfer
 ## Draft transaction
+
+This command below assumes that you are using the utxo from the faucet. If not, please change the amounts at the end of the `--tx-out` lines.
 ```bash
 cardano-cli transaction build-raw \
     --alonzo-era \
-    --tx-in df3651a79874454948181f1fb5dbc60f75407de8514771b7d45bc7045d8776c4#0 \
+    --tx-in <TxHash>#<TxIx> \
     --tx-out $(cat 02.addr)+10000000 \
     --tx-out $(cat 01.addr)+989800000 \
     --invalid-hereafter 0 \
@@ -98,13 +104,19 @@ cardano-cli transaction calculate-min-fee \
 
 ### Add fees to command
 
-Calculate the change using `expr <UTXO BALANCE> - <AMOUNT TO SEND> - <TRANSACTION FEE>` and add it to this line
+Add the fees here
+```
+--fee <your-fees> \
+```
+
+Calculate the change using `expr <UTXO BALANCE> - <AMOUNT TO SEND> - <TRANSACTION FEE>` and replace the amount at this line
 ``` 
-tx-out $(cat 01.addr)+<here> \
+--tx-out $(cat 01.addr)+<here> \
 ```
 in the draft transaction section.
 
 ## Submit transaction
+Before submitting the transaction, you will need to sign it first using `cardano-cli` and then submit it using `bcc`.
 ### Sign the transaction
 ```bash
 cardano-cli transaction sign \
