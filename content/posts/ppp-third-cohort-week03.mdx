@@ -129,11 +129,17 @@ cardano-cli transaction sign \
 ```bash
 bcc transaction submit -f tx.signed -t
 ```
+If everything worked out well, you will be able to check your funds in the second address using
 
+```bash
+bcc query utxo --address $(cat 02.addr) -t
+```
 
 ## Thanks to:
+* @srk in #blockfrost in IOG's Technical Community on discord
+
+## References:
 * https://developers.cardano.org/docs/stake-pool-course/handbook/keys-addresses/
 * https://developers.cardano.org/docs/stake-pool-course/handbook/create-simple-transaction/
-* @srk in #blockfrost in IOG's Technical Community on discord
 
 I am planning to write another blog post for creating a contract on the testnet after [my question on CSE is resolved] (https://cardano.stackexchange.com/questions/6934/ppviewhashesdontmatch-and-unspendableutxonodatumhash-error-on-redeeming-funds-fr). There appears to be some problem with `bcc`. [Sorki](https://cardano.stackexchange.com/users/810/sorki) (aka @srk) knows more about this.
