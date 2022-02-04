@@ -7,12 +7,121 @@ tags:
   - document
   - haskell
 ---
-Install bcc
+These commands are run on a Ubuntu 20.04.1 LTS VM.
 
-make draft transaction
+## Install `cardano-cli`
+Get the `cardano-node` build from iohk from here https://hydra.iohk.io/build/9941151. You can chose another build too.
+Extract the files
+```bash
+tar -xvzf cardano-node-1.33.0-linux.tar.gz
+```
+and then add them to your PATH. For ubuntu simply copying the contents to a directory called `bin` in your `~` dir should be enough. Don't forget to `reset` your terminal.
 
-calculate fees
+## Install `bcc`
+`bcc` or [blockfrost-cardano-cli](https://github.com/blockfrost/blockfrost-cardano-cli#bcc-query-protocol-parameters) is blockfrost's cardano-cli with a few commands implemented. This is will allow us to submit transactions to the testnet without running a node. Create an account [here](https://blockfrost.io/) then install the cli using the command below.
 
-add fees
+```bash
+npm install -g @blockfrost/blockfrost-cardano-cli
+```
+now either set the `BLOCKFROST_PROJECT_ID_TESTNET` variable for the current shell or add it to your `.bash_profile` I recommend adding it to your shell using the command below
+```bash
+export BLOCKFROST_PROJECT_ID_TESTNET=<your-key-here>
+```
+Get your key from the blockfrost [dashboard] (https://blockfrost.io/dashboard?callbackUrl=%2Fdashboard).
 
-submit transaction
+## Create addresses
+### Generate addresses
+```bash
+cardano-cli address key-gen \
+    --verification-key-file 01.vkey \
+    --signing-key-file 01.skey
+cardano-cli address key-gen \
+    --verification-key-file 02.vkey \
+    --signing-key-file 02.skey
+```
+### Make payment addresses
+
+```bash
+cardano-cli address build \
+    --payment-verification-key-file 01.vkey \
+    --testnet-magic 1097911063 \
+    --out-file 01.addr
+cardano-cli address build \
+    --payment-verification-key-file 02.vkey \
+    --testnet-magic 1097911063 \
+    --out-file 02.addr
+```
+## Get funds from faucet
+Do a `cat 01.addr` on the terminal and use the address to get funds from the [faucet](https://testnets.cardano.org/en/testnets/cardano/tools/faucet/)
+
+## Query from testnet
+
+
+```bash
+bcc query protocol-parameters -t --out-file protocol.json
+bcc query utxo --address $(cat 01.addr) -t
+```
+
+```
+
+ TxHash                                                           TxIx   Amount              
+ ──────────────────────────────────────────────────────────────── ────── ─────────────────── 
+ c3850544d66a0eef38326551c35807975c201f25787e8e9a379a306ee6f9c1f3 1      199200000 lovelace  
+ ac2214ad459b6d5921992b9563ba4da6505e88fb7a12f75103c5ba68d43eb4fe 0      1000000000 lovelace 
+ 1c05c7beee527db726aa534e1b3ec9f316211676f81c833a74982d18a6abac37 1      689400000 lovelace  
+```
+
+
+## Draft transaction
+```bash
+cardano-cli transaction build-raw \
+    --alonzo-era \
+    --tx-in df3651a79874454948181f1fb5dbc60f75407de8514771b7d45bc7045d8776c4#0 \
+    --tx-out $(cat 02.addr)+10000000 \
+    --tx-out $(cat 01.addr)+989800000 \
+    --invalid-hereafter 0 \
+    --fee 200000 \
+    --out-file tx.body
+```
+## Calculate fees (optional)
+
+```bash
+cardano-cli transaction calculate-min-fee \
+    --tx-body-file tx.body \
+    --tx-in-count 1 \
+    --tx-out-count 2 \
+    --witness-count 1 \
+    --byron-witness-count 0 \
+    --testnet-magic 1097911063 \
+    --protocol-params-file protocol.json
+```
+
+### Add fees to command
+
+Calculate the change using `expr <UTXO BALANCE> - <AMOUNT TO SEND> - <TRANSACTION FEE>` and add it to this line
+``` 
+tx-out $(cat 01.addr)+<here> \
+```
+in the draft transaction section.
+
+## Submit transaction
+### Sign the transaction
+```bash
+cardano-cli transaction sign \
+    --tx-body-file tx.body \
+    --signing-key-file 01.skey \
+    --testnet-magic 1097911063 \
+    --out-file tx.signed
+```
+### Submit the transaction
+```bash
+bcc transaction submit -f tx.signed -t
+```
+
+
+## Thanks to:
+* https://developers.cardano.org/docs/stake-pool-course/handbook/keys-addresses/
+* https://developers.cardano.org/docs/stake-pool-course/handbook/create-simple-transaction/
+* @srk in #blockfrost in IOG's Technical Community on discord
+
+I am planning to write another blog post for creating a contract on the testnet after [my question on CSE is resolved] (https://cardano.stackexchange.com/questions/6934/ppviewhashesdontmatch-and-unspendableutxonodatumhash-error-on-redeeming-funds-fr). There appears to be some problem with `bcc`. [Sorki](https://cardano.stackexchange.com/users/810/sorki) (aka @srk) knows more about this.
