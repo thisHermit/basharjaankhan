@@ -15,8 +15,8 @@ export default function Index() {
           <h1>
             Hi, it's thisHermit<span className="fancy">.</span>
           </h1>
-          <h2>This is his blog site</h2>
-	  <h4>This blog site is currently very empty. More details can be found on my github page below</h4>
+          <h2></h2>
+          <h4>Currently under construction</h4>
           <SocialList />
         </div>
       </div>
