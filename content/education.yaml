@@ -1,0 +1,20 @@
+- startDate: 2023-10-01
+  endDate: 2026-03-30
+  title: Master of Science in Applied Data Science
+  company:
+    name: Georg-August-Universität
+    link: https://www.uni-goettingen.de/
+  location: Göttingen, Germany
+  summary:
+    - "GPA: 1.6 (German grading system, Highest: 1.0, Lowest: 4.0)"
+    - "Research Lab Rotation: Statistical analyses and graph-estimation of spiking in biological neuronal networks"
+
+- startDate: 2017-08-01
+  endDate: 2021-07-01
+  title: Bachelor of Technology in Computer Science and Engineering
+  company:
+    name: National Institute of Technology, Andhra Pradesh
+    link: https://nitandhra.ac.in/main/
+  location: Tadepalligudem, India
+  summary:
+    - "GPA: 8.46 (Indian grading system, Highest: 10.0, Lowest: 4.0)"

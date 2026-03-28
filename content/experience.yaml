@@ -1,9 +1,61 @@
-- date: 2020-06-02
-  title: great thing ##1
-  description: description 1
-- date: 2020-06-04
-  title: great thing ##2
-  description: description 2
-- date: 2020-06-05
-  title: great thing ##3
-  description: description 3
+- startDate: 2025-04-15
+  endDate: 2025-10-15
+  title: Industrial Thesis Intern
+  company:
+    name: Robert Bosch GmbH
+    link: https://www.bosch.com/research/
+  location: Renningen, Germany
+  summary:
+    - Work on the thesis on the topic "Semi-supervised Continual Learning methods for tabular industrial data"
+
+- startDate: 2024-10-01
+  endDate: 2025-03-01
+  title: Student Assistant
+  company:
+    name: MBExC - Cluster of Excellence Multiscale Bioimaging
+    link: https://mbexc.de/
+  location: Göttingen, Germany
+  summary:
+    - Conduct tutorial sessions and prepare lecture materials for the course Statistical and Computational Data Science II
+
+- startDate: 2024-03-01
+  endDate: 2020-12-01
+  title: Student Assistant
+  company:
+    name: Akademie der Wissenschaft zu Göttingen
+    link: https://adw-goe.de/startseite/
+  location: Göttingen, Germany
+  summary:
+    - Maintain local Databases by fixing duplicate entries and database backups.
+    - Explore RAG based system for querying and studying clerical records from local databases.
+    - Develop a Pipeline to extract clerical entries from "Repertorium Germanicum" pdfs using few shot LLM-based parsing via chromadb.
+    - Developed pipelines for syncing data across Factrgrid, a wikidata instance for clerical details, and local databases.
+    - Fix SSL and PHP code for existing websites.
+
+- startDate: 2022-02-01
+  endDate: 2023-08-01
+  title: Full Stack Engineer (Remote)
+  company:
+    name: MSVN.ca
+    link: https://msvn.ca/
+  location: Toronto, Canada
+  summary:
+    - Develop React functional components using tailwind for websites
+    - Build dockerized API services and worker services for projects
+    - Create Terraform modules to deploy autoscaling services on AWS, using Fargate, ECR and RDS
+    - Perform migrations for databases across projects
+    - Set up and maintained CI/CD pipelines on the dev and production websites
+    - Debug and maintain cloud infrastructure for various projects
+
+- startDate: 2019-10-01
+  endDate: 2019-12-01
+  title: Intern (Remote)
+  company:
+    name: Crio.do
+    link: https://crio.do/
+  location: Bangalore, India
+  summary:
+    - Explore different cloud IDEs (eg Eclipse Che, gitpod) for reproducible remote development
+    - Explore different ECS Fargate and EC2 for autoscaling containers using CloudWatch
+    - Develop debugging script to run test suites on a container
+    - Develop a PoC to reduce test suite running time from ~10 minutes to ~4 seconds

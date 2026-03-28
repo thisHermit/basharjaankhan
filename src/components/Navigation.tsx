@@ -17,17 +17,6 @@ export default function Navigation() {
             </Link>
           </li>
           <li>
-            <Link href="/posts">
-              <a
-                className={
-                  router.pathname.startsWith("/posts") ? "active" : null
-                }
-              >
-                blog
-              </a>
-            </Link>
-          </li>
-          <li>
             <Link href="/portfolio">
               <a
                 className={
@@ -35,6 +24,17 @@ export default function Navigation() {
                 }
               >
                 portfolio
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/posts">
+              <a
+                className={
+                  router.pathname.startsWith("/posts") ? "active" : null
+                }
+              >
+                blog
               </a>
             </Link>
           </li>
