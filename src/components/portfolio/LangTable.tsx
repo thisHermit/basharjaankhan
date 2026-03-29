@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // Component inside your file
-export default function LangTable({ langs }) {
+export default function LangTable({ category, langs }) {
     const [expandedRow, setExpandedRow] = useState(null);
     const proficiencyLabels = ["Beginner", "Amateur", "Competent", "Proficient", "Expert"];
 
@@ -11,24 +11,31 @@ export default function LangTable({ langs }) {
     };
 
     const transformDescription = (description: string) => {
-        if (description.includes("<")) {
-            const [textOnly, ...links] = description.split("<");
-            return <div>
-                {textOnly}
-                {links.map((link, index) =>
+        const regex = /<([^>]+)>(\S+)/g;
+        const parts = description.split(regex);
+
+        if (parts.length === 1) return description;
+
+        const result = []
+
+        for (let i = 0; i < parts.length; i += 3) {
+            result.push(parts[i]);
+
+            if (parts[i + 1] && parts[i + 2]) {
+                result.push(
                     <a
-                        key={index}
-                        href={link.split(">")[1]}
+                        key={i}
+                        href={parts[i + 2]}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="description-link"
                     >
-                        {link.split(">")[0]}
+                        {parts[i + 1]}
                     </a>
-                )}
-            </div>;
-        } else {
-            return description;
+                );
+            }
         }
+        return <div>{result}</div>
     }
 
     return (
@@ -36,7 +43,7 @@ export default function LangTable({ langs }) {
             <table className="langs-table">
                 <thead>
                     <tr>
-                        <th className='skill-header'>Language</th>
+                        <th className='skill-header'>{category.includes("Language") ? "Language" : category.includes("Tools") ? "Tools" : "Skills"}</th>
                         <th className="level-header">Level</th>
                     </tr>
                 </thead>
@@ -160,7 +167,7 @@ export default function LangTable({ langs }) {
                         padding: 0.75rem 1rem;
                         background: #fcfcfc;
                         color: #666;
-                        font-size: 0.85rem;
+                        font-size: 1rem;
                         line-height: 1.5;
                         border-left: 3px solid #15847d;
                         margin-bottom: 0.5rem;

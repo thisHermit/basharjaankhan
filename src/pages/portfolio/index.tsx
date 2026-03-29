@@ -37,12 +37,13 @@ export default function Index({ exp, education, certs, langs }: Props) {
                     {certs.map(
                         item => <CertItem item={item} />
                     )}
+                    <div className="title">Skills</div>
                     <div className="langs-grid">
-                        Click on the row marked with a * below to see more details.
+                        Click on the row marked with a * below to see more details. Morever tools/skills that I have used a couple of times like Langchain or only for one project won't be included.
                         {Object.keys(langs).map((key) => (
                             <div key={key} className="langs-column">
                                 <div className="category-title">{key}</div>
-                                <LangTable langs={langs[key]} />
+                                <LangTable category={key} langs={langs[key]} />
                             </div>
                         ))}
                     </div>

@@ -31,12 +31,53 @@
 #   link:
 #   description: hisd
 
-# - startDate: a
-#   title: Business Analytics Specialisation
-#   link:
-#   description: hisd
+- startDate: 2019-08-11
+  title: IBM Data Science Specialisation
+  issuer: IBM via Coursera
+  link: https://www.coursera.org/account/accomplishments/specialization/XS5UAJK5LKQA
+
+- startDate: 2019-10-26
+  title: Business Analytics Specialisation
+  issuer: University of Pennsylvania via Coursera
+  link: https://www.coursera.org/account/accomplishments/specialization/DH593DKXK7UB
+
+- startDate: 2019-08-17
+  title: Deep Learning Specialisation
+  issuer: DeepLearning.AI via Coursera
+  link: https://www.coursera.org/account/accomplishments/specialization/4KNP4A6NMK3Z
+
+- startDate: 2019-08-27
+  title: Architecting with Google Compute Engine
+  issuer: GCP via Coursera
+  link: https://www.coursera.org/account/accomplishments/specialization/QXAXRUGXAHES
+
+- startDate: 2019-04-03
+  title: Android N Developer Course
+  issuer: Udemy
+  link: https://www.udemy.com/certificate/UC-LTJSUCA2/
+
+- startDate: 2019-07-16
+  title: Google Cloud Skills Boost (formerly Qwicklabs)
+  issuer: GCP
+  link: https://www.skills.google/public_profiles/c608815f-413f-43cf-8ba1-319e3e5e6fc7
+  description: I have a list of skill badges that I got while learning about GCP. I got access to lots of free courses while learning GCP services.
 
 - startDate: 2019-03-17
   title: Machine Learning
   issuer: Stanford Online via Coursera
   link: https://www.coursera.org/account/accomplishments/verify/VE5T876K57MC
+
+- startDate: 2019-03-24
+  title: Google Cloud Big Data and Machine Learning Fundamentals
+  issuer: GCP via Coursera
+  link: https://www.coursera.org/account/accomplishments/verify/R6MFYEQ2DAT3
+
+- startDate: 2019-08-24
+  title: "Elastic Google Cloud Infrastructure: Scaling and Automation"
+  issuer: GCP via Coursera
+  link: https://www.coursera.org/account/accomplishments/verify/QUXBYQPL8M9U
+
+- startDate: 2019-08-25
+  title: "Elastic Cloud Infrastructure: Containers and Services"
+  issuer: GCP via Coursera
+  link: https://www.coursera.org/account/accomplishments/verify/85JPWEHE2ZKQ

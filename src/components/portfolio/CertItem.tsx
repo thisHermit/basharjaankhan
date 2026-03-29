@@ -19,6 +19,7 @@ export default function CertItem({ item }: Props) {
                     </div>
                 </div>
             </div>
+            <div className="code">{item.issuer}</div>
 
             <a
                 className="institution"
@@ -84,9 +85,9 @@ export default function CertItem({ item }: Props) {
                 }
     
                 .code {
-                    font-size: 0.85rem;
+                    font-size: 1rem;
                     color: #444;
-                    margin-top: 0.25rem;
+                    margin-bottom: 0.5rem;
                 }
     
                 .date-wrapper {

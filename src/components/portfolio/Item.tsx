@@ -8,6 +8,7 @@ type Props = {
     item: ItemContent;
 };
 export default function Item({ item }: Props) {
+    const [isExpanded, setIsExpanded] = useState(false);
     return (
         <div className="post-item">
             <div className="post-header">
@@ -41,14 +42,14 @@ export default function Item({ item }: Props) {
                 </ul>
             </div>
 
-            {item.description && <a
-                className="location"
-                href={item.description}
-                target="_blank"
-                rel="noopener noreferrer"
+            {isExpanded && <div className="description">{item.description}</div>}
+
+            {item.description && <button
+                className="read-more"
+                onClick={() => setIsExpanded(!isExpanded)}
             >
-                Read more
-            </a>}
+                {isExpanded ? 'Show less' : 'Read more'}
+            </button>}
 
             <style jsx>
                 {`

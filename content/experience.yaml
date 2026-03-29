@@ -47,6 +47,20 @@
     - Set up and maintained CI/CD pipelines on the dev and production websites
     - Debug and maintain cloud infrastructure for various projects
 
+- startDate: 2021-07-01
+  endDate: 2021-12-01
+  title: Backend Developer (Remote)
+  company:
+    name: FoodTrain
+    link: https://foodtrain.co
+  location: Dayton, Ohio, USA
+  summary:
+    - Develop driver and delivery logic using expressJs.
+    - Worked on Expo, React Native and later a React PWA for the FE
+    - Maintain dev and prod deployments and monitoring using pm2
+    - Maintain CD using gitlab and later github actions
+  description: Foodtrain was a hyper localized bulk restaurant food delivery service. This startup no longer exists. LinkedIn helped me find this job.
+
 - startDate: 2019-10-01
   endDate: 2019-12-01
   title: Intern (Remote)

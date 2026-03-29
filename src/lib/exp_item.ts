@@ -31,6 +31,7 @@ export type CertContent = {
     readonly startDate: string;
     readonly endDate?: string;
     readonly title: string;
+    readonly issuer: string;
     readonly link: string;
     readonly code: string;
     readonly description?: string;
