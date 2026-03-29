@@ -1,0 +1,26 @@
+Name,Category,Level,Description
+Python,Programming Languages,4,I have been using python for a long while. <My Github repositories can be found here.>https://github.com/thisHermit?tab=repositories&q=&type=&language=python&sort=
+Java,Programming Languages,4,Java is basically my mother tongue in terms of programming languages since I learnt all my programming concepts in this language. It was my second language I learnt. I built a small game in this language for my school project for my final year of high school and had lots of fun learning about OOPS concepts.
+Javascript,Programming Languages,4,I have used Javascript extensively with frameworks like React and I am quite familiar with it's usage.
+Golang,Programming Languages,3,"I have done a few hobby projects, <a Mandlebrot set visualisation,>https://github.com/thisHermit/quick_madlebrot<, and a Uni project working with a blockchain web-crawler>https://github.com/dennis-tra/nebula/commits?author=thisHermit"
+Typescript,Programming Languages,2,I often just use Typescript types on top of Javascript and never looked at any other advanced features of the language.
+C++,Programming Languages,2,"I have spent a lot of time using this language during my Bachelor's. As I became more proficient with the language, I realised concepts that existed that I never knew existed. For example template programming and functional programming concepts."
+Visual Basic,Programming Languages,2,This is the first programming language I learnt.
+Bash,Programming Languages,2,I script quite often in bash but I forget the basic syntax quite frequently. I use zsh as my shell so syntax highlighting makes this easier.
+Haskell,Programming Languages,2,
+Rust,Programming Languages,1,I have done a course in my Master's degree but I haven't played with the language enough to use it with any level of proficiency.
+German,Language,C1,
+English,Language,C1,"I got a TOEFL score of 108/120 on July 23, 2023 and a MyBest Score of 113/120."
+Urdu,Language,Native,
+Hindi,Language,Native,
+Retrieval Augmented Generation,Machine Learning,3,
+Fine-Tuning LLMs,Machine Learning,2,
+Computer Vision,Machine Learning,2,
+Graph Machine Learning,Machine Learning,2,
+AWS Fargate,Cloud Technologies,4,
+AWS Cloudfront,Cloud Technologies,4,
+AWS ECR,Cloud Technologies,3,
+AWS VPC,Cloud Technologies,3,
+AWS EC2,Cloud Technologies,3,
+GCP Compute Engine,Cloud Technologies,3,
+GCP Kubernetes,Cloud Technologies,3,

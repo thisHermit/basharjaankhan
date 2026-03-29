@@ -1,0 +1,42 @@
+- startDate: 2025-04-15
+  endDate: 2025-10-15
+  title: AWS Certified Solutions Architect - Associate
+  issuer: Amazon
+  link: https://aws.amazon.com/verification
+  code: GHF37LR262411DS9
+  description: To verify the Certificate, please put the code in the verification link above.
+
+- startDate: 2025-04-15
+  endDate: 2025-10-15
+  title: AWS Certified Cloud Practitioner
+  issuer: Amazon
+  link: https://aws.amazon.com/verification
+  code: VRMWPGH1YFVEQYCV
+  description: To verify the Certificate, please put the code in the verification link above.
+
+- startDate: 2019-08-01
+  title: Architecting with Google Compute Engine
+  issuer: Google via Coursera
+  link: https://coursera.org/verify/specialization/QXAXRUGXAHES
+
+- startDate: 2026-01-28
+  title: Goethe Zertifikat C1
+  issuer: Goethe Institute
+  link: https://www.goethe.de/verify
+  code: 2030-AC1A-0002633243
+  description: The complete verification of this certificate requires personal details that won't be available here.
+
+# - startDate: a
+#   title: Deep Learning Specialization
+#   link:
+#   description: hisd
+
+# - startDate: a
+#   title: Business Analytics Specialisation
+#   link:
+#   description: hisd
+
+- startDate: 2019-03-17
+  title: Machine Learning
+  issuer: Stanford Online via Coursera
+  link: https://www.coursera.org/account/accomplishments/verify/VE5T876K57MC
